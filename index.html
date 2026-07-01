@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MD. Shahinur Rahman Polas — Portfolio</title>
+<style>
+  :root{
+    --bg:#0f172a;
+    --bg2:#1e293b;
+    --accent:#38bdf8;
+    --accent2:#818cf8;
+    --text:#e2e8f0;
+    --muted:#94a3b8;
+    --card:#1e293b;
+    --line:#334155;
+    --nav-bg:rgba(15,23,42,.85);
+    --hero-h1:#fff;
+    --stat-num:#fff;
+    --edu-h3:#fff;
+    --tl-h3:#fff;
+  }
+  :root.light{
+    --bg:#f1f5f9;
+    --bg2:#e2e8f0;
+    --accent:#0284c7;
+    --accent2:#6366f1;
+    --text:#1e293b;
+    --muted:#64748b;
+    --card:#ffffff;
+    --line:#cbd5e1;
+    --nav-bg:rgba(241,245,249,.85);
+    --hero-h1:#0f172a;
+    --stat-num:#0f172a;
+    --edu-h3:#0f172a;
+    --tl-h3:#0f172a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:var(--accent);text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* Nav */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:var(--nav-bg);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+  nav .brand{font-weight:700;font-size:1.1rem;color:var(--hero-h1)}
+  nav .brand span{color:var(--accent)}
+  nav ul{list-style:none;display:flex;gap:18px;align-items:center}
+  nav ul a{color:var(--muted);font-size:.9rem;transition:.2s}
+  nav ul a:hover{color:var(--accent)}
+  .nav-actions{display:flex;align-items:center;gap:14px}
+  .theme-toggle{
+    background:var(--card);border:1px solid var(--line);border-radius:50%;
+    width:38px;height:38px;cursor:pointer;font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;transition:.25s;
+    color:var(--accent);
+  }
+  .theme-toggle:hover{border-color:var(--accent);transform:rotate(20deg)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .burger span{width:24px;height:2px;background:var(--hero-h1);transition:.3s}
+  @media(max-width:768px){
+    nav ul{display:none}
+    .burger{display:flex}
+    nav ul.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--bg2);padding:20px;gap:14px}
+  }
+
+  section{padding:90px 0;scroll-margin-top:64px}
+  .section-title{font-size:1.8rem;font-weight:700;margin-bottom:8px;color:var(--hero-h1)}
+  .section-title span{color:var(--accent)}
+  .section-sub{color:var(--muted);margin-bottom:40px;font-size:.95rem}
+
+  /* Hero */
+  #hero{
+    min-height:100vh;display:flex;align-items:center;
+    background:radial-gradient(circle at 20% 20%,rgba(56,189,248,.15),transparent 50%),
+               radial-gradient(circle at 80% 80%,rgba(129,140,248,.15),transparent 50%),
+               var(--bg);
+    text-align:center;
+  }
+  #hero .avatar{
+    width:140px;height:140px;border-radius:50%;
+    background:var(--card);
+    display:flex;align-items:center;justify-content:center;
+    font-size:3rem;font-weight:700;color:#0f172a;margin:0 auto 24px;
+    box-shadow:0 10px 40px rgba(56,189,248,.4);
+    overflow:hidden;border:3px solid var(--line);
+  }
+  #hero .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  #hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  #hero .container{position:relative;z-index:1}
+  #hero h1{font-size:2.6rem;color:var(--hero-h1);margin-bottom:10px}
+  #hero .role{color:var(--accent);font-size:1.15rem;margin-bottom:20px;font-weight:500}
+  #hero .tagline{color:var(--muted);max-width:600px;margin:0 auto 30px}
+  .btn{
+    display:inline-block;padding:12px 28px;border-radius:8px;
+    font-weight:600;transition:.25s;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--accent);color:#0f172a}
+  .btn-primary:hover{background:#0ea5e9;transform:translateY(-2px)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+  .stat-card{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:24px 18px;text-align:center;transition:.25s;
+  }
+  .stat-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .stat-num{font-size:2.2rem;font-weight:800;color:var(--stat-num);line-height:1}
+  .stat-num span{color:var(--accent)}
+  .stat-lbl{color:var(--muted);font-size:.85rem;margin-top:8px}
+
+  /* Education */
+  .edu-card{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:24px;margin-bottom:18px;transition:.25s;
+  }
+  .edu-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .edu-card .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .edu-card h3{color:var(--edu-h3);font-size:1.1rem}
+  .edu-card .year{color:var(--accent);font-weight:600}
+  .edu-card .meta{color:var(--muted);font-size:.9rem}
+
+  /* Experience timeline */
+  .timeline{position:relative;padding-left:30px}
+  .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--line)}
+  .tl-item{position:relative;margin-bottom:30px}
+  .tl-item::before{content:'';position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+  .tl-item .date{color:var(--accent);font-size:.85rem;font-weight:600}
+  .tl-item h3{color:var(--tl-h3);font-size:1.1rem;margin:4px 0}
+  .tl-item .company{color:var(--accent2);font-size:.9rem;margin-bottom:6px}
+  .tl-item p{color:var(--muted);font-size:.92rem}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+  .skill-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;transition:.25s}
+  .skill-card:hover{border-color:var(--accent)}
+  .skill-card h3{color:var(--accent);margin-bottom:14px;font-size:1rem}
+  .chip{display:inline-block;background:var(--bg2);border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:20px;font-size:.82rem;margin:4px 4px 0 0}
+  .skill-bar{margin:10px 0}
+  .skill-bar .lbl{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:5px}
+  .skill-bar .track{height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
+  .skill-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;width:0;transition:width 1.2s ease}
+
+  /* Training */
+  .train-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:768px){.train-grid{grid-template-columns:1fr}}
+  .train-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;transition:.25s}
+  .train-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .train-card h3{color:var(--edu-h3);margin-bottom:6px}
+  .train-card .org{color:var(--accent);font-size:.9rem;margin-bottom:10px}
+  .train-card p{color:var(--muted);font-size:.9rem}
+
+  /* Contact */
+  #contact{background:var(--bg2)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+  .contact-item{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .contact-item .ic{width:44px;height:44px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+  .contact-item .ic{color:var(--accent)}
+  .contact-item .lbl{color:var(--muted);font-size:.8rem}
+  .contact-item .val{color:var(--hero-h1);font-weight:500}
+  .traits{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .traits .chip{background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(129,140,248,.15));border-color:var(--accent)}
+
+  .copyright{text-align:center;color:var(--muted);font-size:.85rem;padding:24px;border-top:1px solid var(--line)}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:.6s}
+  .reveal.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="brand">Polas<span>.</span>dev</div>
+    <ul id="navMenu">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="nav-actions-mobile" style="display:none;gap:14px;align-items:center">
+        <a href="https://github.com/srpolas" target="_blank" rel="noopener">GitHub</a>
+      </li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#9728;</button>
+      <a href="https://github.com/srpolas" target="_blank" rel="noopener" class="theme-toggle" title="GitHub" style="text-decoration:none">&#128187;</a>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section id="hero">
+  <canvas id="particleCanvas"></canvas>
+  <div class="container">
+    <div class="avatar"><img src="profile.jpg" alt="MD. Shahinur Rahman Polas" loading="eager" /></div>
+    <h1>MD. Shahinur Rahman Polas</h1>
+    <p class="role">Software Engineer · C# / .NET · MERN Developer</p>
+    <p class="tagline">Energetic, self-motivated, and creative developer with a decade of diverse IT experience — building school &amp; college management systems, web applications, and scalable business solutions.</p>
+    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+    &nbsp;
+    <a href="CV of POLAS RampsBD+Silkcity.doc" download class="btn btn-ghost">&#11015; Download Resume</a>
+    &nbsp;
+    <a href="https://github.com/srpolas" target="_blank" rel="noopener" class="btn btn-ghost">&#128187; GitHub</a>
+  </div>
+</section>
+
+<!-- 2. ABOUT -->
+<section id="about" class="reveal">
+  <div class="container">
+    <h2 class="section-title">About <span>Me</span></h2>
+    <p class="section-sub">Full-time programmer &amp; software engineer.</p>
+    <div class="about-grid">
+      <div>
+        <p style="margin-bottom:16px">
+          I am a full-time <b style="color:var(--accent)">.NET / C# programmer</b> and full-stack web developer with over a decade of hands-on experience across software development, system analysis, and IT operations. Currently I build and maintain School &amp; College management applications at SilkCity Solutions using C#, .NET, and .NET Core.
+        </p>
+        <p style="margin-bottom:16px;color:var(--muted)">
+          My toolkit spans the Microsoft stack (ASP.NET Core, SQL Server) and the MERN stack (React, Node.js, Express, MongoDB). I care about clean, maintainable code, sensible architecture, and shipping features that solve real business problems — from enterprise resource systems to consumer web apps.
+        </p>
+        <p style="color:var(--muted)">
+          I thrive on learning new technology, mentoring teammates, and turning ambiguous requirements into reliable, well-tested software. Whether it's designing a database schema, building a REST API, or crafting a responsive UI, I own the work end-to-end.
+        </p>
+        <div class="traits">
+          <span class="chip">Problem Solver</span>
+          <span class="chip">Clean Code</span>
+          <span class="chip">Self-motivated</span>
+          <span class="chip">Fast Learner</span>
+          <span class="chip">Team Player</span>
+          <span class="chip">Detail-Oriented</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num" data-target="10">0</div>
+          <div class="stat-lbl">Years in IT</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="7">0</div>
+          <div class="stat-lbl">Companies Served</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="2">0</div>
+          <div class="stat-lbl">Full-Stack Stacks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="100" data-suffix="%">0</div>
+          <div class="stat-lbl">Dedicated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. EDUCATION -->
+<section id="education" class="reveal">
+  <div class="container">
+    <h2 class="section-title">Educational <span>Qualification</span></h2>
+    <p class="section-sub">My academic background.</p>
+
+    <div class="edu-card">
+      <div class="top"><h3>MBA — Management</h3><span class="year">2015</span></div>
+      <p class="meta">GPA 2.81 · Rajshahi College · National University</p>
+    </div>
+    <div class="edu-card">
+      <div class="top"><h3>BBS — B.Com</h3><span class="year">2013</span></div>
+      <p class="meta">3rd Division · Rajshahi College · National University</p>
+    </div>
+    <div class="edu-card">
+      <div class="top"><h3>DIBS — Accounting</h3><span class="year">2010</span></div>
+      <p class="meta">GPA 4.14 · Rajshahi Gov. Commercial Institute · DIBS Board</p>
+    </div>
+    <div class="edu-card">
+      <div class="top"><h3>SSC — Commerce</h3><span class="year">2008</span></div>
+      <p class="meta">GPA 3.94 · Baya School and College · Rajshahi Board</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. EXPERIENCE -->
+<section id="experience" class="reveal">
+  <div class="container">
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <p class="section-sub">Over a decade of professional journey.</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="date">February 2024 — Present</div>
+        <h3>Programmer</h3>
+        <div class="company">SilkCity Solutions</div>
+        <p>Developing School/College management applications using C#, .NET, and .NET Core.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="date">April 2017 — January 2024</div>
+        <h3>Junior Officer &amp; System Analyst</h3>
+        <div class="company">F.M Auto Rice Mill &amp; F.M Auto Flour Mill</div>
+        <p>Served on behalf of RAMPSBD Software Firm — system analysis and IT operations.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="date">February 2017 — April 2017</div>
+        <h3>Junior System Analyst &amp; Trainee</h3>
+        <div class="company">RAMPSBD Software Firm</div>
+        <p>Foundational training and system analysis work.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="date">February 2016 — September 2016</div>
+        <h3>Admin &amp; Trainer</h3>
+        <div class="company">BD IT Academy, Rajshahi</div>
+        <p>Managed academy operations and delivered IT training.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="date">October 2013 — November 2014</div>
+        <h3>Executive Service Engineer</h3>
+        <div class="company">Energy Plus Communication Ltd.</div>
+        <p>Service engineering and technical support operations.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="date">March 2013 — October 2013</div>
+        <h3>Executive Service Engineer</h3>
+        <div class="company">Maple International Ltd.</div>
+        <p>Technical service and equipment support.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="date">June 2012 — January 2013</div>
+        <h3>Junior Marketing Executive</h3>
+        <div class="company">MEDS IT Development Ltd.</div>
+        <p>Marketing and business development for IT services.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. SKILLS -->
+<section id="skills" class="reveal">
+  <div class="container">
+    <h2 class="section-title">Computer <span>Skills</span></h2>
+    <p class="section-sub">Technologies and tools I work with.</p>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h3>Programming</h3>
+        <div class="skill-bar"><div class="lbl"><span>C# with ASP.NET</span><span>90%</span></div><div class="track"><div class="fill" data-w="90"></div></div></div>
+        <div class="skill-bar"><div class="lbl"><span>JavaScript / React</span><span>80%</span></div><div class="track"><div class="fill" data-w="80"></div></div></div>
+        <div class="skill-bar"><div class="lbl"><span>SQL</span><span>85%</span></div><div class="track"><div class="fill" data-w="85"></div></div></div>
+        <div class="skill-bar"><div class="lbl"><span>HTML / CSS</span><span>88%</span></div><div class="track"><div class="fill" data-w="88"></div></div></div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Platforms</h3>
+        <span class="chip">Windows (All Versions)</span>
+        <span class="chip">Linux</span>
+        <span class="chip">.NET Core</span>
+        <span class="chip">MERN Stack</span>
+      </div>
+
+      <div class="skill-card">
+        <h3>Office Suite</h3>
+        <span class="chip">MS Office</span>
+        <span class="chip">Google Office</span>
+        <span class="chip">Libre Office</span>
+        <span class="chip">OpenOffice</span>
+      </div>
+
+      <div class="skill-card">
+        <h3>Graphics &amp; Video</h3>
+        <span class="chip">Adobe Photoshop</span>
+        <span class="chip">Illustrator</span>
+        <span class="chip">Picasa</span>
+        <span class="chip">Edius</span>
+        <span class="chip">Corel Video Editor</span>
+      </div>
+
+      <div class="skill-card">
+        <h3>Communication</h3>
+        <span class="chip">Social Networks</span>
+        <span class="chip">Skype</span>
+        <span class="chip">WhatsApp</span>
+        <span class="chip">Email</span>
+        <span class="chip">Web Browsing</span>
+      </div>
+
+      <div class="skill-card">
+        <h3>Soft Skills</h3>
+        <span class="chip">System Analysis</span>
+        <span class="chip">Training</span>
+        <span class="chip">Problem Solving</span>
+        <span class="chip">Teamwork</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 6. TRAINING -->
+<section id="training" class="reveal">
+  <div class="container">
+    <h2 class="section-title">Professional <span>Training</span></h2>
+    <p class="section-sub">Courses that sharpened my craft.</p>
+    <div class="train-grid">
+      <div class="train-card">
+        <h3>Full Stack Developer (MERN Stack)</h3>
+        <div class="org">Programming Hero</div>
+        <p>Gained in-depth knowledge of programming languages, development structures, methods, and community practices around the MERN stack.</p>
+      </div>
+      <div class="train-card">
+        <h3>Full Stack Web Development with ASP.NET Core</h3>
+        <div class="org">Ostad.app</div>
+        <p>Worked alongside professional developers and engineers, gaining deeper insight into how the industry operates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CONTACT -->
+<section id="contact" class="reveal">
+  <div class="container">
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <p class="section-sub">Let's connect and build something together.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <div class="ic">&#9993;</div>
+          <div><div class="lbl">Email</div><div class="val">srpolas.bd@gmail.com</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ic">&#9742;</div>
+          <div><div class="lbl">Phone</div><div class="val">01919262612 / 01731281912</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ic">&#9873;</div>
+          <div><div class="lbl">Address</div><div class="val">Vill-Bholabari (Baya), Poba, Shahmokhdum, Rajshahi</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ic">&#9794;</div>
+          <div><div class="lbl">Secondary Email</div><div class="val">srpolas@yahoo.com</div></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:var(--hero-h1);margin-bottom:14px">Career Objective</h3>
+        <p style="color:var(--muted)">
+          I want a perfect job to develop my career in a particular organization where I can use my skills and experiences to achieve the organizational goals by achieving my personal goal.
+        </p>
+        <div style="margin-top:24px">
+          <a href="mailto:srpolas.bd@gmail.com" class="btn btn-primary">Email Me</a>
+          &nbsp;
+          <a href="tel:01919262612" class="btn btn-ghost">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="copyright">
+  &copy; <span id="year"></span> MD. Shahinur Rahman Polas. All rights reserved.
+</div>
+
+<script>
+  // Mobile nav toggle
+  const burger=document.getElementById('burger');
+  const menu=document.getElementById('navMenu');
+  burger.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+  // Year
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  // Reveal on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+        // animate skill bars
+        e.target.querySelectorAll('.fill').forEach(f=>{
+          f.style.width=f.dataset.w+'%';
+        });
+      }
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Animate hero bars immediately
+  document.querySelectorAll('#hero .fill').forEach(f=>f.style.width=f.dataset.w+'%');
+
+  // Count-up stats
+  const countUp=(el)=>{
+    const target=+el.dataset.target;
+    const suffix=el.dataset.suffix||'';
+    let cur=0;
+    const step=Math.max(1,Math.ceil(target/40));
+    const tick=()=>{
+      cur+=step;
+      if(cur>=target){el.innerHTML=target+'<span>'+suffix+'</span>';}
+      else{el.innerHTML=cur+'<span>'+suffix+'</span>';requestAnimationFrame(tick);}
+    };
+    tick();
+  };
+  const statIO=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){countUp(e.target);statIO.unobserve(e.target);}
+    });
+  },{threshold:.5});
+  document.querySelectorAll('.stat-num').forEach(el=>statIO.observe(el));
+
+  // Theme toggle
+  const themeToggle=document.getElementById('themeToggle');
+  const root=document.documentElement;
+  const savedTheme=localStorage.getItem('theme');
+  if(savedTheme==='light'){root.classList.add('light');themeToggle.innerHTML='&#9790;';}
+  themeToggle.addEventListener('click',()=>{
+    root.classList.toggle('light');
+    const isLight=root.classList.contains('light');
+    themeToggle.innerHTML=isLight?'&#9790;':'&#9728;';
+    localStorage.setItem('theme',isLight?'light':'dark');
+  });
+
+  // Particle network with mouse interaction
+  (function(){
+    const canvas=document.getElementById('particleCanvas');
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    let width,height;
+    let particles=[];
+    const mouse={x:null,y:null,radius:120};
+    let animationId;
+    let isVisible=true;
+
+    function resize(){
+      const rect=canvas.parentElement.getBoundingClientRect();
+      width=rect.width;height=rect.height;
+      canvas.width=width;canvas.height=height;
+      initParticles();
+    }
+
+    function initParticles(){
+      particles=[];
+      const count=Math.min(90,Math.floor((width*height)/12000));
+      for(let i=0;i<count;i++){
+        particles.push({
+          x:Math.random()*width,
+          y:Math.random()*height,
+          vx:(Math.random()-0.5)*0.6,
+          vy:(Math.random()-0.5)*0.6,
+          size:Math.random()*2+1.2
+        });
+      }
+    }
+
+    function draw(){
+      if(!isVisible){animationId=requestAnimationFrame(draw);return}
+      ctx.clearRect(0,0,width,height);
+      const isLight=root.classList.contains('light');
+      const dotColor=isLight?'rgba(2,132,199,0.35)':'rgba(56,189,248,0.45)';
+      const lineColor=isLight?'rgba(2,132,199,0.12)':'rgba(56,189,248,0.18)';
+      const mouseLineColor=isLight?'rgba(2,132,199,0.28)':'rgba(56,189,248,0.35)';
+
+      particles.forEach((p,i)=>{
+        // update position
+        p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0||p.x>width)p.vx*=-1;
+        if(p.y<0||p.y>height)p.vy*=-1;
+
+        // mouse attraction
+        if(mouse.x!==null){
+          const dx=mouse.x-p.x;
+          const dy=mouse.y-p.y;
+          const dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<mouse.radius){
+            const force=(mouse.radius-dist)/mouse.radius;
+            p.vx+=dx*force*0.002;
+            p.vy+=dy*force*0.002;
+          }
+        }
+
+        // friction
+        p.vx*=0.99;p.vy*=0.99;
+
+        // draw dot
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fillStyle=dotColor;
+        ctx.fill();
+
+        // connect to nearby particles
+        for(let j=i+1;j<particles.length;j++){
+          const q=particles[j];
+          const dx=p.x-q.x;
+          const dy=p.y-q.y;
+          const dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<100){
+            ctx.beginPath();
+            ctx.moveTo(p.x,p.y);
+            ctx.lineTo(q.x,q.y);
+            ctx.strokeStyle=lineColor;
+            ctx.lineWidth=1-dist/100;
+            ctx.stroke();
+          }
+        }
+
+        // connect to mouse
+        if(mouse.x!==null){
+          const dx=mouse.x-p.x;
+          const dy=mouse.y-p.y;
+          const dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<mouse.radius){
+            ctx.beginPath();
+            ctx.moveTo(p.x,p.y);
+            ctx.lineTo(mouse.x,mouse.y);
+            ctx.strokeStyle=mouseLineColor;
+            ctx.lineWidth=1-dist/mouse.radius;
+            ctx.stroke();
+          }
+        }
+      });
+
+      animationId=requestAnimationFrame(draw);
+    }
+
+    // track mouse only within hero
+    canvas.parentElement.addEventListener('mousemove',(e)=>{
+      const rect=canvas.getBoundingClientRect();
+      mouse.x=e.clientX-rect.left;
+      mouse.y=e.clientY-rect.top;
+    });
+    canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
+
+    // pause when hero not visible
+    const visIO=new IntersectionObserver((entries)=>{
+      isVisible=entries[0].isIntersecting;
+    },{threshold:0});
+    visIO.observe(canvas.parentElement);
+
+    window.addEventListener('resize',resize);
+    resize();draw();
+  })();
+</script>
+</body>
+</html>
